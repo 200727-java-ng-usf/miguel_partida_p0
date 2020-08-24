@@ -29,15 +29,15 @@ public class LoginScreen extends Screen{
          * Renders the login screen menu to the console.
          */
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-        String username, password;
+        String email, password;
         try {
             System.out.println("Please provide your login credentials");
-            System.out.println("Username: ");
-            username = console.readLine();
+            System.out.println("Email: ");
+            email = console.readLine();
             System.out.println("Password: ");
             password = console.readLine();
 
-             userService.authenticate(username,password);
+             userService.authenticate(email,password);
 
              if(app.isSessionValid()){
                  app.getRouter().navigate("/first");
