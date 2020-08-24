@@ -42,7 +42,7 @@ public class RegisterScreen  extends Screen{
             userServices.register(newUser);
 
             if(app.isSessionValid()){
-                app.getRouter().navigate("/dashboard");
+                app.getRouter().navigate("/first");
             }
 
         }catch(InvalidRequestException e) {

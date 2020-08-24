@@ -40,7 +40,7 @@ public class LoginScreen extends Screen{
              userService.authenticate(username,password);
 
              if(app.isSessionValid()){
-                 app.getRouter().navigate("/dashboard");
+                 app.getRouter().navigate("/first");
              }
         }catch (IOException ioe){
             ioe.printStackTrace();
