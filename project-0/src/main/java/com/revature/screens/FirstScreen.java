@@ -5,7 +5,8 @@ import static com.revature.AppDriver.app;
 public class FirstScreen extends Screen {
 
     public FirstScreen(){
-        super("FirstScreen","/First");
+        super("FirstScreen","/first");
+        System.out.println("Log");
     }
 
     @Override
@@ -25,7 +26,7 @@ public class FirstScreen extends Screen {
                     app.getRouter().navigate("/login");
                     break;
                 case "2":
-                    app.getRouter().navigate("");
+                    app.getRouter().navigate("/register");
                     break;
                 case "3":
                     app.setAppRunning(false);

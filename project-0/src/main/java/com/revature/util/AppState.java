@@ -2,6 +2,7 @@ package com.revature.util;
 
 import com.revature.models.AppUser;
 import com.revature.repos.UserRepository;
+import com.revature.screens.*;
 import com.revature.service.UserServices;
 
 import java.io.BufferedReader;
@@ -24,7 +25,12 @@ public class AppState {
         final UserServices userService = new UserServices(userRepo);
 
         router = new ScreenRouter();
-//        router.addScreen()
+        router.addScreen(new FirstScreen())
+                .addScreen(new LoginScreen(userService))
+                .addScreen(new RegisterScreen(userService))
+                .addScreen(new Withdraw())
+                .addScreen(new Deposit())
+                .addScreen(new AccountOptions());
 
         System.out.println("LOG Application initialization complete");
     }

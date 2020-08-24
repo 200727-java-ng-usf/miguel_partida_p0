@@ -11,7 +11,7 @@ public class AccountOptions extends Screen{
     @Override
     public void render() {
         System.out.println("Welcome please select a task");
-        System.out.println("1: Withdrawl");
+        System.out.println("1: Withdrawal");
         System.out.println("2: Deposit");
         System.out.println("3: Logout and close");
         System.out.println("+-------------------+");

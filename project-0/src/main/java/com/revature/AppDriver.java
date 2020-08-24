@@ -9,7 +9,7 @@ public class AppDriver {
     public static void main(String[] args) {
 
         while(app.isAppRunning()){
-            app.getRouter().navigate("/home");
+            app.getRouter().navigate("/first");
         }
 
     }
