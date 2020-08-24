@@ -1,5 +1,7 @@
 package com.revature.screens;
 
+import static com.revature.AppDriver.app;
+
 public class FirstScreen extends Screen {
 
     public FirstScreen(){
@@ -15,6 +17,22 @@ public class FirstScreen extends Screen {
         System.out.println("+-------------------+");
 
         try{
+
+            String userSelection = app.getCosole().readLine().trim();
+
+            switch(userSelection){
+                case "1":
+                    app.getRouter().navigate("/login");
+                    break;
+                case "2":
+                    app.getRouter().navigate("");
+                    break;
+                case "3":
+                    app.setAppRunning(false);
+                    break;
+                default:
+                    System.out.println("Please Try again");
+            }
 
 
         }catch (Exception e){
