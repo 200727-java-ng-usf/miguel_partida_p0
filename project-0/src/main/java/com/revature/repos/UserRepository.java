@@ -23,7 +23,9 @@ public class UserRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = "SELECT * FROM project0.app_users  " +
+            String sql = "SELECT * FROM project0.app_users au " +
+                    "JOIN project0.user_roles ur "+
+                    "ON au.role_id = ur.id "+
                     "WHERE email = ? AND password = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -69,7 +71,7 @@ public class UserRepository {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO revabooks.app_users " +
-                    "VALUES(?,?, ?, ?, ? ); ";
+                    "VALUES(?,?, ?, ?, ? ,? ); ";
 
             //second parameter here is used to indicate colum names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"id"});
@@ -78,6 +80,7 @@ public class UserRepository {
             pstmt.setString(2, newUser.getFirstName());
             pstmt.setString(3, newUser.getLastName());
             pstmt.setString(4, newUser.getEmail());
+            pstmt.setInt(5,newUser.getRole().ordinal() +1);
 
 
             int rowsInserted = pstmt.executeUpdate();

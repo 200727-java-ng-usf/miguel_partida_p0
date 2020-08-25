@@ -5,11 +5,24 @@ import java.util.Objects;
 public class Account {
 
     private int id;
+    private String account_name;
     private double balance;
 
-    public Account(int id, double balance) {
+    public Account() {
+    }
+
+    public Account(int id, String account_name, double balance) {
         this.id = id;
+        this.account_name = account_name;
         this.balance = balance;
+    }
+
+    public String getAccount_name() {
+        return account_name;
+    }
+
+    public void setAccount_name(String account_name) {
+        this.account_name = account_name;
     }
 
     public int getId() {
@@ -34,18 +47,20 @@ public class Account {
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
         return id == account.id &&
-                Double.compare(account.balance, balance) == 0;
+                Double.compare(account.balance, balance) == 0 &&
+                Objects.equals(account_name, account.account_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, balance);
+        return Objects.hash(id, account_name, balance);
     }
 
     @Override
     public String toString() {
         return "Account{" +
                 "id=" + id +
+                ", account_name='" + account_name + '\'' +
                 ", balance=" + balance +
                 '}';
     }

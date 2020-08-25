@@ -1,6 +1,8 @@
 package com.revature.models;
 
 
+
+
 import java.util.Objects;
 
 public class AppUser {
@@ -9,6 +11,7 @@ public class AppUser {
     private String lastName;
     private String passWord;
     private String email;
+    private Roles role;
 
 //constructors
 
@@ -16,20 +19,36 @@ public class AppUser {
         super();
     }
 
-    public AppUser(Integer id, String firstName, String lastName, String passWord,String email) {
-        this(firstName, lastName, passWord,email);
-        this.id = id;
 
-    }
 
     public AppUser(String firstName, String lastName, String passWord,String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passWord = passWord;
         this.email = email;
+        this.role= Roles.BASIC_USER;
+    }
+
+    public AppUser(String firstName, String lastName, String passWord, String email, Roles role) {
+        this(firstName, lastName, passWord, email);
+        this.role = role;
+    }
+
+    public AppUser(Integer id, String firstName, String lastName, String passWord,String email, Roles role) {
+        this(firstName, lastName, passWord,email, role);
+        this.id = id;
+
     }
 // Getters and Setters
 
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;
@@ -72,7 +91,6 @@ public class AppUser {
     }
 //Hashcode and equals override
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,13 +100,16 @@ public class AppUser {
                 Objects.equals(firstName, appUser.firstName) &&
                 Objects.equals(lastName, appUser.lastName) &&
                 Objects.equals(passWord, appUser.passWord) &&
-                Objects.equals(email, appUser.email);
+                Objects.equals(email, appUser.email) &&
+                role == appUser.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, passWord,email);
+        return Objects.hash(id, firstName, lastName, passWord, email, role);
     }
+
+
 // toString override
 
 
@@ -100,6 +121,7 @@ public class AppUser {
                 ", lastName='" + lastName + '\'' +
                 ", passWord='" + passWord + '\'' +
                 ", email='" + email + '\'' +
+                ", role=" + role +
                 '}';
     }
 }
