@@ -1,9 +1,13 @@
 package com.revature.screens;
 
-public class Withdraw extends Screen{
+import com.revature.service.UserServices;
 
-    public Withdraw(){
+public class Withdraw extends Screen{
+    private UserServices userService;
+
+    public Withdraw(UserServices userService){
         super("WithdrawalScreen","/withdrawal");
+        this.userService = userService;
     }
 
     @Override

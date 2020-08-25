@@ -28,9 +28,9 @@ public class AppState {
         router.addScreen(new FirstScreen())
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new RegisterScreen(userService))
-                .addScreen(new Withdraw())
-                .addScreen(new Deposit())
-                .addScreen(new AccountOptions());
+                .addScreen(new Withdraw(userService))
+                .addScreen(new Deposit(userService))
+                .addScreen(new AccountOptions(userService));
 
         System.out.println("LOG Application initialization complete");
     }

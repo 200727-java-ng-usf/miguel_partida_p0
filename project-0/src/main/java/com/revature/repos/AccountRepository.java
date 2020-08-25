@@ -1,6 +1,7 @@
 package com.revature.repos;
 
 import com.revature.models.Account;
+import com.revature.models.AppUser;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -38,7 +39,8 @@ public class AccountRepository {
         return _account;
     }
 
-    public void fundAccount(String account_name, double balance){
+    public static int fundAccount(String account_name, double balance){
+        int rowsInserted = 0;
 
         try(Connection conn= ConnectionFactory.getInstance().getConnection()){
             String sql = "UPDATE project0.accounts SET balance = ? "+
@@ -47,12 +49,14 @@ public class AccountRepository {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setDouble(1,balance);
             pstmt.setString(2, account_name);
+            rowsInserted = pstmt.executeUpdate();
 
-            pstmt.executeUpdate();
+            
 
         }catch (SQLException sqle) {
             sqle.printStackTrace();
         }
+        return rowsInserted;
     }
 
     public void save(Account account){
@@ -85,6 +89,7 @@ public class AccountRepository {
         while(rs.next()){
             Account temp = new Account();
             temp.setId(rs.getInt("account_id"));
+            temp.setAccount_name(rs.getString("account_name"));
             temp.setBalance(rs.getDouble("balance"));
 
             accounts.add(temp);

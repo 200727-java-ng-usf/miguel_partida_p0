@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Account {
 
-    private int id;
+    private Integer id;
     private String account_name;
     private double balance;
 

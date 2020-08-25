@@ -13,6 +13,7 @@ public class AppUser {
     private String email;
     private Roles role;
 
+
 //constructors
 
     public AppUser(){

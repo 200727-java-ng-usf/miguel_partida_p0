@@ -2,11 +2,15 @@ package com.revature.service;
 
 import com.revature.exceptions.AutheticationException;
 import com.revature.exceptions.InvalidRequestException;
+import com.revature.models.Account;
 import com.revature.models.AppUser;
+import com.revature.models.Roles;
+import com.revature.repos.AccountRepository;
 import com.revature.repos.UserRepository;
 
 import javax.naming.AuthenticationException;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 import static com.revature.AppDriver.app;
@@ -39,12 +43,13 @@ public class UserServices {
             throw new InvalidRequestException("Invalid user field values provided during registration!");
         }
 
-        Optional<Object> existingUser = Optional.ofNullable(userRepo.findUserByEmail(newUser.getEmail()));
+        Optional<AppUser> existingUser = userRepo.findUserByEmail(newUser.getEmail());
         if (existingUser.isPresent()) {
             // TODO implement a custom ResourcePersistenceException
             throw new RuntimeException("Provided email is already in use!");
         }
 
+        newUser.setRole(Roles.BASIC_USER);
         userRepo.save(newUser);
         System.out.println(newUser);
 
@@ -61,11 +66,25 @@ public class UserServices {
      */
     public boolean isUserValid(AppUser user) {
         if (user == null) return false;
+        if(user.getId()==null || user.getId() == 0) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
         if (user.getPassWord() == null || user.getPassWord().trim().equals("")) return false;
         if (user.getEmail()==null || user.getEmail().trim().equals(""))return false;
+
         return true;
+    }
+
+    public int fundAccount(String account_name, double balance){
+        int updated =0;
+
+        try {
+             updated= AccountRepository.fundAccount(account_name,balance);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return updated;
     }
 
     }

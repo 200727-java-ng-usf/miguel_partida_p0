@@ -71,7 +71,7 @@ public class UserRepository {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO revabooks.app_users " +
-                    "VALUES(?,?, ?, ?, ? ,? ); ";
+                    "VALUES(?,?, ?, ?, ? ,?,? ); ";
 
             //second parameter here is used to indicate colum names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"id"});
@@ -111,6 +111,7 @@ public class UserRepository {
             temp.setFirstName(rs.getString("email"));
 
             users.add(temp);
+            System.out.println("BREADCRUMB - " + temp);
         }
          return users;
         }

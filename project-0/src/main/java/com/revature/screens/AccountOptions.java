@@ -1,11 +1,15 @@
 package com.revature.screens;
 
+import com.revature.service.UserServices;
+
 import static com.revature.AppDriver.app;
 
 public class AccountOptions extends Screen{
+    private UserServices userService;
 
-    public AccountOptions(){
+    public AccountOptions(UserServices userService){
         super("Account Options","/options");
+        this.userService = userService;
     }
 
     @Override
@@ -24,7 +28,7 @@ public class AccountOptions extends Screen{
 
             switch(userSelection){
                 case "1":
-                    app.getRouter().navigate("/withdrawl");
+                    app.getRouter().navigate("/withdrawal");
                     break;
                 case "2":
                     app.getRouter().navigate("/deposit");
