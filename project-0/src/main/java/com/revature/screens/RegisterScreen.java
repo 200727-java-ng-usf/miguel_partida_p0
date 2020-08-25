@@ -39,6 +39,7 @@ public class RegisterScreen  extends Screen{
             email = app.getCosole().readLine();
 
             AppUser newUser = new AppUser(firstname,lastname,password,email);
+
             userServices.register(newUser);
 
             if(app.isSessionValid()){

@@ -32,8 +32,8 @@ public class ConnectionFactory {
 
         try{
             //Force the JVM to load the PostGreSQL
-            Class.forName("org.postgresql.Driver");
-//specifing that                               we are using the jdbc and postgresql
+           Class.forName("org.postgresql.Driver");
+//specifing that  we are using the jdbc and postgresql
             conn = DriverManager.getConnection(
                     props.getProperty("url"),
                     props.getProperty("username"),

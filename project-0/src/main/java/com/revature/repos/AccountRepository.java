@@ -38,6 +38,23 @@ public class AccountRepository {
         return _account;
     }
 
+    public void fundAccount(String account_name, double balance){
+
+        try(Connection conn= ConnectionFactory.getInstance().getConnection()){
+            String sql = "UPDATE project0.accounts SET balance = ? "+
+                    "WHERE account_name = ? ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setDouble(1,balance);
+            pstmt.setString(2, account_name);
+
+            pstmt.executeUpdate();
+
+        }catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
     public void save(Account account){
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
             String sql = "INSERT into project0.accounts "+

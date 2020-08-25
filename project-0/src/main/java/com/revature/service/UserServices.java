@@ -21,13 +21,13 @@ public class UserServices {
 
     }
 
-    public void authenticate(String username, String password){
+    public void authenticate(String email, String password){
 
-        // validate that the provided username and password are not non-values
-        if(username==null|| username.trim().equals("")||password == null||password.trim().equals("")){
+        // validate that the provided email and password are not non-values
+        if(email==null|| email.trim().equals("")||password == null||password.trim().equals("")){
             throw new RuntimeException("Invalid credential values provided!");
         }
-        AppUser authUser = userRepo.findUserByCredentials(username,password)
+        AppUser authUser = userRepo.findUserByCredentials(email,password)
                 .orElseThrow(AutheticationException::new);
 
                 app.setCurrentUser(authUser);
