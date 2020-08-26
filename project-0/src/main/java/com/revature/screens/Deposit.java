@@ -17,6 +17,9 @@ public class Deposit extends Screen{
     @Override
     public void render() {
         System.out.println("Deposit");
+        /**
+         * this is the deposit method
+         */
 
         while(app.isSessionValid()){
 

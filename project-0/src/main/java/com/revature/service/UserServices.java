@@ -2,6 +2,7 @@ package com.revature.service;
 
 import com.revature.exceptions.AutheticationException;
 import com.revature.exceptions.InvalidRequestException;
+import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.Account;
 import com.revature.models.AppUser;
 import com.revature.models.Roles;
@@ -53,8 +54,7 @@ public class UserServices {
 
         Optional<AppUser> existingUser = userRepo.findUserByEmail(newUser.getEmail());
         if (existingUser.isPresent()) {
-            // TODO implement a custom ResourcePersistenceException
-            throw new RuntimeException("Provided email is already in use!");
+            throw new ResourcePersistenceException("Provided email is already in use!");
         }
 
         newUser.setRole(Roles.BASIC_USER);

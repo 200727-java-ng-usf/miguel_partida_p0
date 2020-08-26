@@ -15,6 +15,10 @@ import java.util.Set;
 import static com.revature.AppDriver.app;
 
 public class AccountRepository {
+    /**
+     * the Account Repository acts as the data access object
+     * for the account model
+     */
 
     public AccountRepository(){
         super();

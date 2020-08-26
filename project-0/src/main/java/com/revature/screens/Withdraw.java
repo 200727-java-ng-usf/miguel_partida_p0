@@ -14,6 +14,10 @@ public class Withdraw extends Screen{
 
     @Override
     public void render() {
+
+        /**
+         * this is withdrawal
+         */
         System.out.println("Withdrawal");
 
         while (app.isSessionValid()) {
