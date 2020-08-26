@@ -11,7 +11,8 @@ public class Account {
     public Account() {
     }
 
-    public Account( String account_name, double balance) {
+    public Account(Integer id, String account_name, double balance) {
+        this.id = id;
         this.account_name = account_name;
         this.balance = balance;
     }

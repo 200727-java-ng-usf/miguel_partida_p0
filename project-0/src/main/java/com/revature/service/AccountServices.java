@@ -1,0 +1,44 @@
+package com.revature.service;
+
+import com.revature.exceptions.AutheticationException;
+import com.revature.exceptions.InvalidRequestException;
+import com.revature.models.Account;
+import com.revature.repos.AccountRepository;
+
+import static com.revature.AppDriver.app;
+
+public class AccountServices {
+    private AccountRepository accRepo;
+
+    public AccountServices(AccountRepository repo){
+        accRepo= repo;
+    }
+
+    public void authenticate(Integer account_id){
+        if(account_id == 0){
+            throw new RuntimeException("Invalid credential values provided!");
+        }
+
+        Account accUser = accRepo.findById(account_id)
+                .orElseThrow(AutheticationException::new);
+        app.setAccountUser(accUser);
+    }
+
+    public void register(Account accnt){
+        if(!isAccountValid(accnt)){
+            throw new InvalidRequestException("Invalid user field values provided during registration!");
+        }
+
+        accRepo.save(accnt);
+        System.out.println(accnt);
+        app.setAccountUser(accnt);
+    }
+
+    public boolean isAccountValid(Account accnt){
+        if(accnt== null)return false;
+        if(accnt.getAccount_name() ==null || accnt.getAccount_name().trim().equals("")) return false;
+        if(accnt.getId()==0)return false;
+
+        return true;
+    }
+}

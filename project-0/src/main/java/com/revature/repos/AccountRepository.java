@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.revature.AppDriver.app;
+
 public class AccountRepository {
 
     public AccountRepository(){
@@ -82,21 +84,22 @@ public class AccountRepository {
     public void save(Account account){
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
             String sql = "INSERT into project0.accounts "+
-                    "(account_name, balance) " +
-                    "VALUES (?,?,?,?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"account_id","user_id"});
+                    "(user_id,account_name, balance) " +
+                    "VALUES (?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"account_id"});
 
-            pstmt.setString(1,account.getAccount_name());
-            pstmt.setDouble(2,account.getBalance());
+            pstmt.setInt(1,app.getCurrentUser().getId());
+            pstmt.setString(2,account.getAccount_name());
+            pstmt.setDouble(3,account.getBalance());
 
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
                 ResultSet rs = pstmt.getGeneratedKeys();
-                while (rs.next()) {
-                    account.setId(rs.getInt("id"));
-                }
+                rs.next();
+                account.setId(rs.getInt(1));
             }
+
 
         }catch (SQLException sqle){
             sqle.printStackTrace();

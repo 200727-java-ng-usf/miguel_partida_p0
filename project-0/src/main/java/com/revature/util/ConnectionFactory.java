@@ -8,12 +8,20 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionFactory {
+    /**
+     * ConnectionFactory is a singelton design pattern
+     * where there can only be one  "single" instance
+     * bellow is an "eager" singelton
+     * instatiated right away
+     */
     private static ConnectionFactory connFactory = new ConnectionFactory();
 
     private Properties props = new Properties();
 
+    /**
+     * this will confirm the file inside of resources
+     */
     private ConnectionFactory(){
-
         try {
             props.load(new FileReader("src/main/resources/application.properties"));
         }catch (IOException e){
@@ -25,7 +33,11 @@ public class ConnectionFactory {
     public static ConnectionFactory getInstance(){
         return connFactory;
     }
-
+    /**
+     * getConnection
+     * class.forname gets the language specific driver; postgresql
+     * the DriverManager then establishes the connection with the file inputs
+ */
     public Connection getConnection(){
 
         Connection conn = null;
@@ -49,7 +61,12 @@ public class ConnectionFactory {
         return conn;
     }
 
-
+    /**
+     * Here is part of the singelton design pattern
+     * ensuring that our connectionfactory is not duplicated
+     * @return
+     * @throws CloneNotSupportedException
+     */
     @Override
     protected Object clone()throws CloneNotSupportedException{
         throw new CloneNotSupportedException();

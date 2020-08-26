@@ -72,10 +72,11 @@ public class UserRepository {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO project0.account_user " +
+                    "(first_name,last_name,passwrd,email,role_id) " +
                     "VALUES (?,?,?,?,?) ";
 
             //second parameter here is used to indicate column names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(sql,new String[] {"user_id"});
 
             pstmt.setString(1, newUser.getFirstName());
             pstmt.setString(2, newUser.getLastName());
@@ -88,10 +89,10 @@ public class UserRepository {
 
             if (rowsInserted != 0) {
                 ResultSet rs = pstmt.getGeneratedKeys();
-                while (rs.next()) {
-                    newUser.setId(rs.getInt("id"));
+                 rs.next();
+                 newUser.setId(rs.getInt(1));
                 }
-            }
+
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();
