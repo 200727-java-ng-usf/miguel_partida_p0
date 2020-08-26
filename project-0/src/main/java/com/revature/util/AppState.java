@@ -26,11 +26,12 @@ public class AppState {
 
         router = new ScreenRouter();
         router.addScreen(new FirstScreen())
-                .addScreen(new LoginScreen(userService))
-                .addScreen(new RegisterScreen(userService))
-                .addScreen(new Withdraw(userService))
-                .addScreen(new Deposit(userService))
-                .addScreen(new AccountOptions(userService));
+              .addScreen(new LoginScreen(userService))
+              .addScreen(new RegisterScreen(userService))
+              .addScreen(new Withdraw(userService))
+              .addScreen(new Deposit(userService))
+              .addScreen(new AccountOptions(userService))
+              .addScreen(new RegisterAccountScreen(userService));
 
         System.out.println("LOG Application initialization complete");
     }

@@ -1,6 +1,7 @@
 package com.revature.repos;
 
 import com.revature.models.AppUser;
+import com.revature.models.Roles;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -49,7 +50,8 @@ public class UserRepository {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = "SELECT * FROM project0.account_user WHERE email = ?";
+            String sql = "SELECT email FROM project0.account_user " +
+                    "WHERE email = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -67,18 +69,17 @@ public class UserRepository {
 
     public void save(AppUser newUser) {
 
-
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO revabooks.app_users " +
-                    "VALUES(?,?, ?, ?, ? ,?,? ); ";
+            String sql = "INSERT INTO project0.account_user " +
+                    "VALUES (?,?,?,?,?) ";
 
-            //second parameter here is used to indicate colum names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"id"});
+            //second parameter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, newUser.getPassWord());
-            pstmt.setString(2, newUser.getFirstName());
-            pstmt.setString(3, newUser.getLastName());
+            pstmt.setString(1, newUser.getFirstName());
+            pstmt.setString(2, newUser.getLastName());
+            pstmt.setString(3, newUser.getPassWord());
             pstmt.setString(4, newUser.getEmail());
             pstmt.setInt(5,newUser.getRole().ordinal() +1);
 
@@ -109,9 +110,9 @@ public class UserRepository {
             temp.setFirstName(rs.getString("last_name"));
             temp.setFirstName(rs.getString("passwrd"));
             temp.setFirstName(rs.getString("email"));
+            temp.setRole(Roles.getByName(rs.getString("role_id")));
 
             users.add(temp);
-            System.out.println("BREADCRUMB - " + temp);
         }
          return users;
         }

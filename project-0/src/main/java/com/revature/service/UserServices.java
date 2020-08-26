@@ -66,7 +66,6 @@ public class UserServices {
      */
     public boolean isUserValid(AppUser user) {
         if (user == null) return false;
-        if(user.getId()==null || user.getId() == 0) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
         if (user.getPassWord() == null || user.getPassWord().trim().equals("")) return false;
@@ -82,6 +81,17 @@ public class UserServices {
              updated= AccountRepository.fundAccount(account_name,balance);
 
         }catch (Exception e){
+            e.printStackTrace();
+        }
+        return updated;
+    }
+
+    public int deFundAccount(String account_name, double deposit){
+        int updated = 0;
+        try{
+            updated = AccountRepository.deFundAccount(account_name,deposit);
+
+        }catch(Exception e){
             e.printStackTrace();
         }
         return updated;

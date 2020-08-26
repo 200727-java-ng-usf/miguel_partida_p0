@@ -43,7 +43,7 @@ public class RegisterScreen  extends Screen{
             userServices.register(newUser);
 
             if(app.isSessionValid()){
-                app.getRouter().navigate("/options");
+                app.getRouter().navigate("/register_account");
             }
 
         }catch(InvalidRequestException e) {

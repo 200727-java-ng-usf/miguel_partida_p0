@@ -23,7 +23,7 @@ public class AccountRepository {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = "SELECT * FROM project0.account "+
+            String sql = "SELECT user_id FROM project0.account_user "+
                     "WHERE account_id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -43,7 +43,7 @@ public class AccountRepository {
         int rowsInserted = 0;
 
         try(Connection conn= ConnectionFactory.getInstance().getConnection()){
-            String sql = "UPDATE project0.accounts SET balance = ? "+
+            String sql = "UPDATE project0.accounts SET balance = balance + ? "+
                     "WHERE account_name = ? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -55,6 +55,26 @@ public class AccountRepository {
 
         }catch (SQLException sqle) {
             sqle.printStackTrace();
+        }
+        return rowsInserted;
+    }
+
+    public static int deFundAccount(String account_name, double balance){
+        int rowsInserted =0;
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+            String sql = "UPDATE project0.accounts SET balance = balance - ? "+
+                    "WHERE account_name = ? ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setDouble(1,balance);
+            pstmt.setString(2, account_name);
+
+            rowsInserted = pstmt.executeUpdate();
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
         }
         return rowsInserted;
     }
@@ -77,6 +97,29 @@ public class AccountRepository {
                     account.setId(rs.getInt("id"));
                 }
             }
+
+        }catch (SQLException sqle){
+            sqle.printStackTrace();
+        }
+    }
+
+    public static void showBalance(String account_name){
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+            String sql = "SELECT balance FROM project0.accounts " +
+                    "WHERE account_name = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,account_name);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                System.out.print("Amount: $");
+                System.out.println(rs.getDouble(1));
+            }
+
 
         }catch (SQLException sqle){
             sqle.printStackTrace();
