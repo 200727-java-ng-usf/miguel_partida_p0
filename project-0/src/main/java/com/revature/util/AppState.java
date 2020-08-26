@@ -20,7 +20,6 @@ public class AppState {
     private boolean appRunning;
 
     public AppState(){
-        System.out.println("LOG - initializing application...");
 
         appRunning = true;
         cosole = new BufferedReader(new InputStreamReader(System.in));
@@ -45,7 +44,6 @@ public class AppState {
               .addScreen(new AccountOptions(userService))
               .addScreen(new RegisterAccountScreen(accService));
 
-        System.out.println("LOG Application initialization complete");
     }
 
     public Account getAccountUser() {

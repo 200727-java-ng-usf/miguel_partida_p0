@@ -15,8 +15,10 @@ public class AccountOptions extends Screen{
 
     @Override
     public void render() {
-
-try {
+/**
+ * here you enter your account name to achieve you current balance
+ */
+        try {
     System.out.println("Enter your account name:");
 
     String account_name = app.getCosole().readLine().trim();
@@ -27,7 +29,9 @@ try {
     e.printStackTrace();
 }
 
-
+/**
+ * Here is where you can select where you would like to deposit or withdrawal
+ */
         System.out.println("Welcome please select a task");
         System.out.println("1: Withdrawal");
         System.out.println("2: Deposit");

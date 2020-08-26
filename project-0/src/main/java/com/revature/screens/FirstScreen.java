@@ -6,7 +6,6 @@ public class FirstScreen extends Screen {
 
     public FirstScreen(){
         super("FirstScreen","/first");
-        System.out.println("Log");
     }
 
     @Override

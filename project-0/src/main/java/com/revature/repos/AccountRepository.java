@@ -17,7 +17,7 @@ import static com.revature.AppDriver.app;
 public class AccountRepository {
 
     public AccountRepository(){
-        System.out.println("LOG - Instatitating"+ this.getClass().getName());
+        super();
     }
 
     public Optional<Account> findById(Integer id){

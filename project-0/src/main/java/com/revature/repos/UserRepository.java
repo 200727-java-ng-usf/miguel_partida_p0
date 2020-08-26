@@ -16,7 +16,7 @@ public class UserRepository {
     //data access object
 
     public UserRepository() {
-        System.out.println("LOG - Instatitating" + this.getClass().getName());
+        super();
     }
 
     public Optional<AppUser> findUserByCredentials(String email, String password) {
