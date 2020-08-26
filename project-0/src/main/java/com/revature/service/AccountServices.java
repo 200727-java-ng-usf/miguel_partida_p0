@@ -14,16 +14,12 @@ public class AccountServices {
         accRepo= repo;
     }
 
-    public void authenticate(Integer account_id){
-        if(account_id == 0){
-            throw new RuntimeException("Invalid credential values provided!");
-        }
 
-        Account accUser = accRepo.findById(account_id)
-                .orElseThrow(AutheticationException::new);
-        app.setAccountUser(accUser);
-    }
-
+    /**
+     * this will make suer
+     * that the accnt does have the correct values to help
+     * @param accnt
+     */
     public void register(Account accnt){
         if(!isAccountValid(accnt)){
             throw new InvalidRequestException("Invalid user field values provided during registration!");

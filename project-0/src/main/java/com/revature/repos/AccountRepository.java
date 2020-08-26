@@ -106,6 +106,11 @@ public class AccountRepository {
         }
     }
 
+    /**
+     * this will show how much is in the
+     * balance with the given account_name
+     * @param account_name
+     */
     public static void showBalance(String account_name){
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){

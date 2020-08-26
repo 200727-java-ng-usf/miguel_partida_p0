@@ -32,8 +32,8 @@ public class AppState {
         final AccountServices accService = new AccountServices(accRepo);
         /**
          * we instatiate here also before the main is called
-         *
-         *
+         * to have all our screens available to move through when
+         * inside of the main
          */
 
         router = new ScreenRouter();

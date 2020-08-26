@@ -25,6 +25,14 @@ public class UserServices {
 
     }
 
+    /**
+     *  lets the user find its existence
+     *  within its own user and the sets
+     *  it to the currentUser
+     * @param email
+     * @param password
+     */
+
     public void authenticate(String email, String password){
 
         // validate that the provided email and password are not non-values
@@ -73,6 +81,16 @@ public class UserServices {
 
         return true;
     }
+
+    /**
+     * this here is our deposit method
+     * that will take the accout_name and deposit amount
+     * and then get the query ran inside of the fundAccount method
+     * in the account repository
+     * @param account_name
+     * @param balance
+     * @return
+     */
 
     public int fundAccount(String account_name, double balance){
         int updated =0;
